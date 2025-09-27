@@ -1,0 +1,650 @@
+{
+  "ירקות ופירות": [
+    {
+      "name": "מלפופנים",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "עגבניות שרי",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "עגבניות רגילות",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "קישואים",
+      "selected": false,
+      "quantity": 6
+    },
+    {
+      "name": "פלפלים",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "בטטות",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "שק תפוחי אדמה",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "כוסברה",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "עלי מנגולד",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "חסה",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "סלק",
+      "selected": false,
+      "quantity": 4
+    },
+    {
+      "name": "קולורבי",
+      "selected": true,
+      "quantity": 1
+    },
+    {
+      "name": "אפרסקים",
+      "selected": false,
+      "quantity": 9
+    },
+    {
+      "name": "נקטרינות",
+      "selected": false,
+      "quantity": 6
+    },
+    {
+      "name": "רימון",
+      "selected": false,
+      "quantity": 3
+    },
+    {
+      "name": "מנגו",
+      "selected": false,
+      "quantity": 4
+    },
+    {
+      "name": "ענבים",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "אפרסמון",
+      "selected": true,
+      "quantity": 1
+    },
+    {
+      "name": "תפוז",
+      "selected": true,
+      "quantity": 1
+    },
+    {
+      "name": "פטריות",
+      "selected": false,
+      "quantity": 2
+    },
+    {
+      "name": "פטרוזיליה",
+      "selected": false,
+      "quantity": 2
+    },
+    {
+      "name": "תפוחי אדמה קטנים",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "בצל",
+      "selected": false,
+      "quantity": 9
+    },
+    {
+      "name": "בצל סגול",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "גזר",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "כרוב לבן",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "כרוב סגול",
+      "selected": true,
+      "quantity": 1
+    },
+    {
+      "name": "לימון",
+      "selected": false,
+      "quantity": 4
+    },
+    {
+      "name": "שמיר",
+      "selected": false,
+      "quantity": 2
+    }
+  ],
+  "קפואים": [
+    {
+      "name": "שועית ירוקה",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "ירקות העונה",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "גזר גמדי",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "אדממה",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "ג'חנון",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "קובה מטפוניה",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "קובה חומסטה",
+      "selected": true,
+      "quantity": 0
+    }
+  ],
+  "שימורים": [
+    {
+      "name": "תירס",
+      "selected": false,
+      "quantity": 3
+    },
+    {
+      "name": "אפונה",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "רסק עגבניות",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "עגבניות חתוכות שלישיה",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "מלפפנים חמוצים",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "טונה",
+      "selected": true,
+      "quantity": 0
+    }
+  ],
+  "שתיה": [
+    {
+      "name": "קולה",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "דיאט ספרייט",
+      "selected": false,
+      "quantity": 2
+    },
+    {
+      "name": "מיץ תפוזים",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "בירה שחורה",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "בירות",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "יין לבן",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "יין אדום",
+      "selected": false,
+      "quantity": 2
+    },
+    {
+      "name": "יין תירוש",
+      "selected": true,
+      "quantity": 1
+    }
+  ],
+  "פיצוחים וקטניות": [
+    {
+      "name": "אגוזי מלך",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "אגוזי פקאן",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "שקדים",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "שקדים פרוסים",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "תערובת לסלט",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "פיצוחים",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "בונדוקים",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "בוטנים",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "צימוקים בהירים",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "שקדים חצויים",
+      "selected": false,
+      "quantity": 1
+    }
+  ],
+  "כללי": [
+    {
+      "name": "חבילת פיתות",
+      "selected": false,
+      "quantity": 2
+    },
+    {
+      "name": "קרקרים",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "פריכיות",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "קטשופ",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "מיונז",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "שמן קנולה",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "שמן זית",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "חומץ בלסמי",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "חומץ אורז",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "רוטב טריאקי",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "סוכר",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "מלח",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "קמח",
+      "selected": true,
+      "quantity": 1
+    },
+    {
+      "name": "קמח תופח",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "קמח קוסמין",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "ניירות אפיה",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "סוכריות לעוגה",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "פסטות",
+      "selected": false,
+      "quantity": 3
+    },
+    {
+      "name": "פתיתים",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "קוסקוס",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "פירורי לחם",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "שקדי מרק",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "אבקת מרק",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "אורז בסמטי",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "אורז פרסי",
+      "selected": false,
+      "quantity": 2
+    },
+    {
+      "name": "אורז עגול לסושי",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "קפה נמס",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "קפה שחור",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "קפסולות לקפה",
+      "selected": false,
+      "quantity": 2
+    },
+    {
+      "name": "שוקולית",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "דבש",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "ריבה",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "שוקולד השחר",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "חפיסת שוקולד חלב",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "חפיסת שוקולד מריר",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "דובשניות",
+      "selected": false,
+      "quantity": 2
+    },
+    {
+      "name": "פתיבר",
+      "selected": true,
+      "quantity": 0
+    }
+  ],
+  "מוצרי חלב": [
+    {
+      "name": "קוטג' 5 אחוז",
+      "selected": false,
+      "quantity": 0
+    },
+    {
+      "name": "גבינה לבנה",
+      "selected": false,
+      "quantity": 0
+    },
+    {
+      "name": "גבינת שמנת",
+      "selected": false,
+      "quantity": 0
+    },
+    {
+      "name": "חמאה",
+      "selected": false,
+      "quantity": 0
+    },
+    {
+      "name": "גד של דני",
+      "selected": false,
+      "quantity": 0
+    },
+    {
+      "name": "שמנת לבישול",
+      "selected": false,
+      "quantity": 4
+    },
+    {
+      "name": "ביצים קטן",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "ביצים גדול",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "גבינה צהובה",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "גבינה מגורדת",
+      "selected": false,
+      "quantity": 1
+    },
+    {
+      "name": "יוגורט",
+      "selected": false,
+      "quantity": 0
+    },
+    {
+      "name": "מילקי",
+      "selected": false,
+      "quantity": 0
+    },
+    {
+      "name": "שמנת חמוצה",
+      "selected": false,
+      "quantity": 4
+    },
+    {
+      "name": "קוטג'",
+      "selected": false,
+      "quantity": 2
+    },
+    {
+      "name": "מעדני תות",
+      "selected": false,
+      "quantity": 0
+    },
+    {
+      "name": "גבינות שוות",
+      "selected": false,
+      "quantity": 0
+    },
+    {
+      "name": "חלב",
+      "selected": false,
+      "quantity": 3
+    },
+    {
+      "name": "גבינת פרמז'ן",
+      "selected": false,
+      "quantity": 0
+    }
+  ],
+  "ניקיון": [
+    {
+      "name": "נייר טואלט",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "פיפר טאואל",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "טישו",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "מגבוני תחת",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "קופסאות חד פעמיות",
+      "selected": false,
+      "quantity": 3
+    },
+    {
+      "name": "ספריי לניקוי חלונות כחול",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "אקונומיקה",
+      "selected": false,
+      "quantity": 1
+    }
+  ],
+  "חטיפים": [
+    {
+      "name": "ביסלי",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "במבה",
+      "selected": true,
+      "quantity": 0
+    },
+    {
+      "name": "תפוצ'יפס",
+      "selected": true,
+      "quantity": 1
+    },
+    {
+      "name": "בייגלה",
+      "selected": true,
+      "quantity": 1
+    }
+  ]
+}
