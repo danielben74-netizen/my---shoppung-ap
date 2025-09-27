@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>רשימת קניות לסופר</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>רשימת קניות לסופר</h1>
+        <div class="control-group">
+            <button id="lock-btn">
+                <span id="lock-icon" data-locked="false">🔓</span>
+                <span>נעילת מיון</span>
+            </button>
+        </div>
+        
+        <form id="add-item-form">
+            <input type="text" id="item-name" placeholder="הכנס שם מוצר" required>
+            <select id="item-category" required>
+                <option value="">בחר קטגוריה</option>
+                <option value="ירקות ופירות">ירקות ופירות</option>
+                <option value="קפואים">קפואים</option>
+                <option value="שימורים">שימורים</option>
+                <option value="כללי">כללי</option>
+                <option value="שתיה">שתיה</option>
+                <option value="פיצוחים וקטניות">פיצוחים וקטניות</option>
+                <option value="מוצרי חלב">מוצרי חלב</option>
+                <option value="ניקיון">ניקיון</option>
+                <option value="חטיפים">חטיפים</option>
+            </select>
+            <button type="submit">הוסף מוצר</button>
+        </form>
+
+        <div id="share-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100;">
+            <div style="background: white; padding: 20px; border-radius: 8px; max-width: 90%; margin: 50px auto; position: relative;">
+                <h2>העתק את רשימת הקניות:</h2>
+                <textarea id="share-text-area" style="width: 100%; height: 200px; margin-bottom: 10px; font-size: 16px; border: 1px solid #ddd; padding: 10px; direction: ltr; text-align: left;"></textarea>
+                <button id="copy-btn" style="background-color: #008CBA; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">העתק רשימה</button>
+                <button id="close-modal-btn" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-right: 10px;">סגור</button>
+            </div>
+        </div>
+        <div id="shopping-lists">
+            <div class="category-list">
+                <h2>ירקות ופירות</h2>
+                <ul id="ירקות ופירות"></ul>
+            </div>
+            <div class="category-list">
+                <h2>קפואים</h2>
+                <ul id="קפואים"></ul>
+            </div>
+            <div class="category-list">
+                <h2>שימורים</h2>
+                <ul id="שימורים"></ul>
+            </div>
+            <div class="category-list">
+                <h2>כללי</h2>
+                <ul id="כללי"></ul>
+            </div>
+            <div class="category-list">
+                <h2>שתיה</h2>
+                <ul id="שתיה"></ul>
+            </div>
+            <div class="category-list">
+                <h2>פיצוחים וקטניות</h2>
+                <ul id="פיצוחים וקטניות"></ul>
+            </div>
+            <div class="category-list">
+                <h2>מוצרי חלב</h2>
+                <ul id="מוצרי חלב"></ul>
+            </div>
+            <div class="category-list">
+                <h2>ניקיון</h2>
+                <ul id="ניקיון"></ul>
+            </div>
+            <div class="category-list">
+                <h2>חטיפים</h2>
+                <ul id="חטיפים"></ul>
+            </div>
+        </div>
+        <div class="button-group">
+            <button id="share-list-btn">שיתוף (העתקת טקסט)</button>
+            <button id="export-json-btn">ייצוא נתונים</button>
+            <button id="import-json-btn">ייבוא נתונים</button>
+            <input type="file" id="import-json-input" accept=".json" style="display:none;">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
