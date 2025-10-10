@@ -104,6 +104,14 @@ li.selectable {
     justify-content: space-between;
     align-items: center;
     transition: background-color 0.2s;
+    
+    /*
+    *** התיקונים המכריעים ל-Safari (iOS) ***
+    מאפיינים אלו מונעים את פתיחת חלון החיפוש בגלל גרירת אלמנט.
+    */
+    -webkit-user-drag: none; /* מונע את מחוות הגרירה הטבעית של הדפדפן */
+    user-select: none; /* מונע בחירת טקסט בזמן הגרירה */
+    -webkit-touch-callout: none; /* מונע את הופעת תפריט הלחיצה הארוכה */
 }
 
 li.selectable:hover {
