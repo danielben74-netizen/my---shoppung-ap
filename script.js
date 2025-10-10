@@ -30,6 +30,12 @@ let draggedItem = null;
 // Set initial state to locked
 let isLocked = true;
 
+// **משתנים לטיפול במגע (Touch Events)**
+let touchStartTime = 0;
+let touchTimeout = null;
+const LONG_PRESS_DELAY = 500; // חצי שנייה לחיצה ארוכה נחשבת לגרירה
+
+
 function saveList() {
     localStorage.setItem('shoppingList', JSON.stringify(shoppingList));
 }
@@ -50,7 +56,81 @@ function createListItem(item, category) {
     `;
     li.classList.toggle('selected', item.selected);
 
+    // ********** טיפול במחוות מגע (Touch Events) **********
+    li.addEventListener('touchstart', (e) => {
+        if (isLocked) return;
+        
+        // נותן לחיצה ארוכה להתחיל גרירה (Long Press)
+        touchStartTime = Date.now();
+        touchTimeout = setTimeout(() => {
+            if (!isLocked) {
+                draggedItem = li;
+                draggedItem.classList.add('dragging');
+                e.preventDefault(); // מונע פעולת ברירת מחדל כמו בחירת טקסט
+                // נסמן את הפריט כגורר כדי ש-touchmove יעבוד כראוי
+                li.setAttribute('data-is-dragging', 'true'); 
+            }
+        }, LONG_PRESS_DELAY);
+    }, { passive: false });
+
+    li.addEventListener('touchmove', (e) => {
+        // אם הפריט לא מסומן כנגרר, או הרשימה נעולה, אל תעשה כלום
+        if (!li.hasAttribute('data-is-dragging') || isLocked) {
+            clearTimeout(touchTimeout);
+            return;
+        }
+
+        e.preventDefault(); // חיוני כדי למנוע גלילה בדף ולטפל בתנועה
+        const touch = e.touches[0];
+        const ul = li.closest('ul');
+        
+        // יצירת אירוע דמה של dragover כדי למקם את הפריט
+        if (ul) {
+            const afterElement = getDragAfterElement(ul, touch.clientY);
+            const draggable = document.querySelector('.dragging');
+            if (draggable) {
+                if (afterElement == null) {
+                    ul.appendChild(draggable);
+                } else {
+                    ul.insertBefore(draggable, afterElement);
+                }
+            }
+        }
+    }, { passive: false });
+
+    li.addEventListener('touchend', (e) => {
+        // אם היה רק הקלקה קצרה (לא גרירה)
+        if (Date.now() - touchStartTime < LONG_PRESS_DELAY && !li.hasAttribute('data-is-dragging')) {
+            li.click(); // בצע את פעולת ה-click הרגילה (סימון/ביטול סימון)
+        }
+        
+        // אם סיימנו גרירה
+        if (li.hasAttribute('data-is-dragging')) {
+            draggedItem = li; // הגדר את draggedItem כדי ש-dragendLogic ירוץ
+            dragendLogic();
+            li.removeAttribute('data-is-dragging');
+        }
+        
+        clearTimeout(touchTimeout);
+        draggedItem = null;
+    });
+
+    li.addEventListener('touchcancel', () => {
+        clearTimeout(touchTimeout);
+        if (li.hasAttribute('data-is-dragging')) {
+            draggedItem = li;
+            dragendLogic();
+            li.removeAttribute('data-is-dragging');
+        }
+        draggedItem = null;
+    });
+    // ********** סוף טיפול במחוות מגע **********
+
+
     li.addEventListener('click', () => {
+        // מנוע כפילויות של קליק אחרי touchend
+        if (li.hasAttribute('data-is-dragging')) return; 
+
         item.selected = !item.selected;
         li.classList.toggle('selected', item.selected);
         saveList();
@@ -142,7 +222,36 @@ form.addEventListener('submit', (e) => {
     itemCategorySelect.value = lastSelectedCategory;
 });
 
-// Drag and Drop Logic (נשאר ללא שינוי)
+
+// ** פונקציית לוגיקה לגרירה סופית (משותפת ל-Mouse ול-Touch) **
+function dragendLogic() {
+    if (isLocked) {
+        return;
+    }
+    if (draggedItem) {
+        draggedItem.classList.remove('dragging');
+        
+        const sourceCategory = draggedItem.dataset.category;
+        const ul = document.getElementById(sourceCategory);
+        const newOrderNodes = Array.from(ul.querySelectorAll('li'));
+        
+        const newItemsOrder = [];
+        newOrderNodes.forEach(node => {
+            const itemName = node.dataset.itemName;
+            const originalItem = shoppingList[sourceCategory].find(item => item.name === itemName);
+            if (originalItem) {
+                newItemsOrder.push(originalItem);
+            }
+        });
+        
+        shoppingList[sourceCategory] = newItemsOrder;
+        saveList();
+    }
+    draggedItem = null;
+}
+
+
+// Drag and Drop Logic (for mouse/non-touch devices)
 shoppingListsContainer.addEventListener('dragstart', (e) => {
     if (isLocked) {
         e.preventDefault();
@@ -165,7 +274,7 @@ shoppingListsContainer.addEventListener('dragover', (e) => {
     }
     e.preventDefault();
     const ul = e.target.closest('ul');
-    if (ul && ul.id === draggedItem.dataset.category) {
+    if (ul && draggedItem && ul.id === draggedItem.dataset.category) {
         const afterElement = getDragAfterElement(ul, e.clientY);
         const draggable = document.querySelector('.dragging');
         if (afterElement == null) {
@@ -176,28 +285,7 @@ shoppingListsContainer.addEventListener('dragover', (e) => {
     }
 });
 
-shoppingListsContainer.addEventListener('dragend', () => {
-    if (draggedItem) {
-        draggedItem.classList.remove('dragging');
-        
-        const sourceCategory = draggedItem.dataset.category;
-        const ul = document.getElementById(sourceCategory);
-        const newOrderNodes = Array.from(ul.querySelectorAll('li'));
-        
-        const newItemsOrder = [];
-        newOrderNodes.forEach(node => {
-            const itemName = node.dataset.itemName;
-            const originalItem = shoppingList[sourceCategory].find(item => item.name === itemName);
-            if (originalItem) {
-                newItemsOrder.push(originalItem);
-            }
-        });
-        
-        shoppingList[sourceCategory] = newItemsOrder;
-        saveList();
-    }
-    draggedItem = null;
-});
+shoppingListsContainer.addEventListener('dragend', dragendLogic); // שימוש בפונקציה המאוחדת
 
 function getDragAfterElement(container, y) {
     const draggableElements = [...container.querySelectorAll('li:not(.dragging)')];
@@ -212,90 +300,25 @@ function getDragAfterElement(container, y) {
         }
     }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
-// סוף Drag and Drop Logic
 
 
-// Export and Import Logic (נשאר ללא שינוי)
-exportJsonButton.addEventListener('click', () => {
-    const dataStr = JSON.stringify(shoppingList, null, 2);
-    const blob = new Blob([dataStr], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'shoppingList_data.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    alert("רשימת הקניות יצאה לקובץ shoppingList_data.json!");
-});
-
-importJsonButton.addEventListener('click', () => {
-    importJsonInput.click();
-});
-
-importJsonInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (!file) {
-        return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-        try {
-            const importedList = JSON.parse(event.target.result);
-            if (importedList && typeof importedList === 'object') {
-                shoppingList = importedList;
-                renderList();
-                saveList();
-                alert("רשימת הקניות יובאה בהצלחה!");
-            } else {
-                alert("שגיאה: קובץ JSON לא תקין.");
-            }
-        } catch (error) {
-            alert("שגיאה בייבוא הקובץ. ודא שהוא בפורמט JSON נכון.");
-            console.error(error);
-        }
-    };
-    reader.readAsText(file);
-});
-
-
-lockButton.addEventListener('click', () => {
-    isLocked = !isLocked;
-    lockIcon.textContent = isLocked ? '🔒' : '🔓';
-    lockIcon.dataset.locked = isLocked;
-    
-    const allItems = document.querySelectorAll('li.selectable');
-    allItems.forEach(item => {
-        item.draggable = !isLocked;
-    });
-});
-
-// **פונקציה ליצירת טקסט פשוט לשיתוף**
-function formatShoppingListForShare() {
-    let text = "רשימת הקניות שלי:\n\n";
+// ** לוגיקת שיתוף (העתקת טקסט) **
+shareListButton.addEventListener('click', () => {
+    // קוד יצירת רשימה להעתקה...
+    let listText = 'רשימת הקניות שלי:\n\n';
     const categories = ["ירקות ופירות", "קפואים", "שימורים", "כללי", "שתיה", "פיצוחים וקטניות", "מוצרי חלב", "ניקיון", "חטיפים"];
 
     categories.forEach(category => {
         const items = (shoppingList[category] || []).filter(item => !item.selected);
-        
         if (items.length > 0) {
-            text += `* ${category}:` + '\n';
+            listText += `*${category}*\n`;
             items.forEach(item => {
-                const quantityText = item.quantity !== undefined && item.quantity > 0 ? ` (${item.quantity} יח')` : '';
-                text += `- ${item.name}${quantityText}` + '\n';
+                const quantityText = item.quantity !== undefined && item.quantity > 0 ? ` (${item.quantity})` : '';
+                listText += `- ${item.name}${quantityText}\n`;
             });
-            text += '\n'; // הוספת רווח בין קטגוריות
+            listText += '\n';
         }
     });
-    return text;
-}
-
-
-// **לוגיקת כפתור השיתוף - פתיחת מודל העתקה**
-shareListButton.addEventListener('click', () => {
-    const listText = formatShoppingListForShare();
 
     if (listText.trim() === "רשימת הקניות שלי:") {
         alert('הרשימה ריקה! הוסף מוצרים כדי לשתף.');
@@ -326,19 +349,79 @@ copyButton.addEventListener('click', () => {
                 alert('הרשימה הועתקה ללוח! ניתן להדביק בוואטסאפ/מייל.');
                 shareModal.style.display = 'none';
             }).catch(() => {
-                alert('שגיאה: העתקה אוטומטית נכשלה. אנא העתק ידנית את הטקסט מהתיבה.');
+                alert('שגיאה: העתקה אוטומטית נכשלה. אנא העתק ידנית את הטקסט.');
             });
         }
     } catch (err) {
-        // מנגנון חלופי אחרון
-        alert('שגיאה: העתקה אוטומטית נכשלה. אנא העתק ידנית את הטקסט מהתיבה.');
+        alert('שגיאה: העתקה אוטומטית נכשלה. אנא העתק ידנית את הטקסט.');
     }
 });
 
-
-// **לוגיקת סגירת המודל**
 closeModalButton.addEventListener('click', () => {
     shareModal.style.display = 'none';
+});
+
+// לוגיקת ייצוא וייבוא
+exportJsonButton.addEventListener('click', () => {
+    const dataStr = JSON.stringify(shoppingList, null, 2);
+    const blob = new Blob([dataStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'shoppingList_data.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    alert("רשימת הקניות יצאה לקובץ shoppingList_data.json!");
+});
+
+importJsonButton.addEventListener('click', () => {
+    importJsonInput.click();
+});
+
+importJsonInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) {
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+        try {
+            const importedList = JSON.parse(event.target.result);
+            if (importedList && typeof importedList === 'object') {
+                shoppingList = importedList;
+                saveList();
+                renderList();
+                alert("רשימת הקניות יובאה בהצלחה!");
+            } else {
+                alert("שגיאה: קובץ JSON לא תקין.");
+            }
+        } catch (error) {
+            alert("שגיאה בייבוא הקובץ. ודא שהוא בפורמט JSON נכון.");
+            console.error(error);
+        }
+    };
+    reader.readAsText(file);
+});
+
+
+lockButton.addEventListener('click', () => {
+    isLocked = !isLocked;
+    lockIcon.textContent = isLocked ? '🔒' : '🔓';
+    lockIcon.dataset.locked = isLocked;
+    
+    const allItems = document.querySelectorAll('li.selectable');
+    allItems.forEach(item => {
+        item.draggable = !isLocked;
+        // ביטול או הגדרת המאפיין לאפשר גרירה מחדש
+        if (!isLocked) {
+            item.setAttribute('draggable', 'true');
+        } else {
+            item.removeAttribute('draggable');
+        }
+    });
 });
 
 if (lastSelectedCategory) {
